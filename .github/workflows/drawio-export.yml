@@ -31,7 +31,7 @@ jobs:
       - name: Detect changed Draw.io files
         id: changed_files
         run: |
-          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/**/*.drawio' || true)
+          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
           if [[ -z "$CHANGED" ]]; then
             echo "No .drawio files changed."
             exit 0
