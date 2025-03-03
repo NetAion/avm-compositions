@@ -1,0 +1,53 @@
+name: Auto Export Draw.io Diagrams (Only Changed Files)
+
+on:
+  push:
+    paths:
+      - 'docs/diagrams/source/*.drawio'
+  pull_request:
+    paths:
+      - 'docs/diagrams/source/*.drawio'
+
+jobs:
+  export-changed-diagrams:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Draw.io CLI
+        run: |
+          wget https://github.com/jgraph/drawio-desktop/releases/latest/download/draw.io-x86_64.AppImage -O drawio
+          chmod +x drawio
+
+      - name: Detect changed Draw.io files
+        id: changed_files
+        run: |
+          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio')
+          echo "Changed files: $CHANGED"
+          echo "FILES=$CHANGED" >> $GITHUB_ENV
+
+      - name: Convert only changed Draw.io files to PNG and SVG
+        if: env.FILES != ''
+        run: |
+          mkdir -p docs/diagrams/exports
+          for file in $FILES; do
+            filename=$(basename "$file" .drawio)
+            output_png="docs/diagrams/exports/$filename.png"
+            output_svg="docs/diagrams/exports/$filename.svg"
+
+            ./drawio -x -f png -o "$output_png" "$file"
+            ./drawio -x -f svg -o "$output_svg" "$file"
+
+            echo "Exported: $output_png and $output_svg"
+          done
+
+      - name: Commit exported files
+        if: env.FILES != ''
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+          git add docs/diagrams/exports/*.png docs/diagrams/exports/*.svg
+          git commit -m "Auto-export updated Draw.io diagrams" || echo "No changes to commit"
+          git push
