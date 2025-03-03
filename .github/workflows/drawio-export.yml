@@ -16,15 +16,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Draw.io CLI
+      - name: Get latest Draw.io AppImage filename
         run: |
-          sudo apt update
-          sudo apt install -y drawio
+          wget -q https://github.com/jgraph/drawio-desktop/releases/latest/download/latest-linux.yml -O latest.yml
+          DRAWIO_FILENAME=$(grep -oP 'path:\s*\K.*' latest.yml | head -1)
+          echo "Latest Draw.io AppImage: $DRAWIO_FILENAME"
+          echo "DRAWIO_FILENAME=$DRAWIO_FILENAME" >> $GITHUB_ENV
+
+      - name: Download and Install Draw.io CLI
+        run: |
+          wget -q "https://github.com/jgraph/drawio-desktop/releases/latest/download/$DRAWIO_FILENAME" -O drawio
+          chmod +x drawio
 
       - name: Detect changed Draw.io files
         id: changed_files
         run: |
-          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio')
+          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/**/*.drawio' || true)
+          if [[ -z "$CHANGED" ]]; then
+            echo "No .drawio files changed."
+            exit 0
+          fi
           echo "FILES=$CHANGED" >> $GITHUB_ENV
           echo "✅ Changed files: $CHANGED"
 
