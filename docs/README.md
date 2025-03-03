@@ -16,7 +16,7 @@ docs/
 
 This directory contains architectural and infrastructure diagrams used in project documentation.
 
-- **`source/`**: Contains the original `.drawio` files, which can be edited using [Draw.io (diagrams.net)](https://www.diagrams.net/).
+- **`source/`**: Contains the original `.drawio` files, which can be edited using [Draw.io](https://www.drawio.com).
 - **`exports/`**: Stores exported diagram files (PNG, SVG, or other formats) generated from the source `.drawio` files. These exports are used in Markdown documentation to provide visual references.
 
 #### **Editing `.drawio` Files Online**
