@@ -44,6 +44,9 @@ jobs:
             cp "$file" temp_drawio/
           done
 
+      - name: Debug - List files before running Draw.io export
+        run: ls -R temp_drawio || echo "⚠️ temp_drawio is empty!"
+
       - name: Export Draw.io diagrams to PNG
         uses: rlespinasse/drawio-export-action@v2
         with:
@@ -59,6 +62,9 @@ jobs:
           output: docs/diagrams/exports
           format: svg
           transparent: true
+
+      - name: Debug - List output files after Draw.io export
+        run: ls -R docs/diagrams/exports || echo "⚠️ No files exported!"
 
       - name: Commit exported files
         if: env.FILES != ''
