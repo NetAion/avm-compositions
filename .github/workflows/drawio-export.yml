@@ -16,6 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Xvfb and Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y xvfb libgtk-3-0 libasound2 libgbm1
+
       - name: Install Draw.io CLI (Extract AppImage)
         run: |
           wget -q https://github.com/jgraph/drawio-desktop/releases/latest/download/latest-linux.yml -O latest.yml
@@ -60,9 +65,9 @@ jobs:
             output_png="docs/diagrams/exports/$filename.png"
             output_svg="docs/diagrams/exports/$filename.svg"
 
-            # Run Draw.io without sandbox to prevent permission issues
-            $DRAWIO_CLI --no-sandbox -x -f png -o "$output_png" "$file"
-            $DRAWIO_CLI --no-sandbox -x -f svg -o "$output_svg" "$file"
+            # Run Draw.io inside a virtual X server
+            xvfb-run -a $DRAWIO_CLI --no-sandbox -x -f png -o "$output_png" "$file"
+            xvfb-run -a $DRAWIO_CLI --no-sandbox -x -f svg -o "$output_svg" "$file"
 
             echo "✅ Exported: $output_png and $output_svg"
           done
