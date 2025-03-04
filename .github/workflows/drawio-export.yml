@@ -45,7 +45,7 @@ jobs:
           done
 
       - name: Export only changed Draw.io diagrams
-        uses: rlespinasse/drawio-export-action@v3
+        uses: rlespinasse/drawio-export-action@v2
         with:
           path: temp_drawio  # Input only modified files
           output: docs/diagrams/exports  # Direct output to the main exports directory
