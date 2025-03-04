@@ -46,10 +46,10 @@ jobs:
             output_png="docs/diagrams/exports/$filename.png"
             output_svg="docs/diagrams/exports/$filename.svg"
 
-            docker run --rm -v "$(pwd)":/workspace fjudith/drawio \
+            docker run --rm -v "$(pwd)":/workspace rlespinasse/drawio-desktop-headless \
               --export --format png --output "/workspace/$output_png" "/workspace/$file"
 
-            docker run --rm -v "$(pwd)":/workspace fjudith/drawio \
+            docker run --rm -v "$(pwd)":/workspace rlespinasse/drawio-desktop-headless \
               --export --format svg --output "/workspace/$output_svg" "/workspace/$file"
 
             echo "✅ Exported: $output_png and $output_svg"
