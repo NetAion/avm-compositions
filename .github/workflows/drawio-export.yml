@@ -21,14 +21,21 @@ jobs:
       - name: Detect changed Draw.io files
         id: changed_files
         run: |
-          git fetch --prune --unshallow || true
+          # Check if the repository is shallow before attempting to unshallow it
+          if [ -f .git/shallow ]; then
+            git fetch --prune --unshallow
+          else
+            git fetch --prune
+          fi
+
           if git rev-parse ${{ github.event.before }} >/dev/null 2>&1; then
-            CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
+            CHANGED=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
           else
             echo "⚠️ No previous commit found. Listing all .drawio files."
             CHANGED=$(git ls-files -- 'docs/diagrams/source/*.drawio' || true)
           fi
 
+          # Ensure CHANGED is empty if no modifications were detected
           if [[ -z "$CHANGED" ]]; then
             echo "No .drawio files changed."
             exit 0
