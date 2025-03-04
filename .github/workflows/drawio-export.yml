@@ -44,12 +44,20 @@ jobs:
             cp "$file" temp_drawio/
           done
 
-      - name: Export only changed Draw.io diagrams
+      - name: Export Draw.io diagrams to PNG
         uses: rlespinasse/drawio-export-action@v2
         with:
-          path: temp_drawio  # Input only modified files
-          output: docs/diagrams/exports  # Direct output to the main exports directory
-          format: png,svg
+          path: temp_drawio
+          output: docs/diagrams/exports
+          format: png
+          transparent: true
+
+      - name: Export Draw.io diagrams to SVG
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: temp_drawio
+          output: docs/diagrams/exports
+          format: svg
           transparent: true
 
       - name: Commit exported files
