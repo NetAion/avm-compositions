@@ -57,9 +57,9 @@ jobs:
           output: docs/diagrams/exports  # Export directly to the main directory
           format: png
           transparent: true
-          since-reference: ""  # Prevents using --git-ref
-          internal_push_before: ""  # Explicitly disable commit-based filtering
-          internal_push_forced: false  # Ensure all files are processed          
+          #since-reference: ""  # Prevents using --git-ref
+          #internal_push_before: ""  # Explicitly disable commit-based filtering
+          #internal_push_forced: false  # Ensure all files are processed          
 
       - name: Export only changed Draw.io diagrams (SVG)
         uses: rlespinasse/drawio-export-action@v2
@@ -68,18 +68,15 @@ jobs:
           output: docs/diagrams/exports
           format: svg
           transparent: true
-          since-reference: ""  # Prevents using --git-ref
-          internal_push_before: ""  # Explicitly disable commit-based filtering
-          internal_push_forced: false  # Ensure all files are processed       
+          #since-reference: ""  # Prevents using --git-ref
+          #internal_push_before: ""  # Explicitly disable commit-based filtering
+          #internal_push_forced: false  # Ensure all files are processed       
 
-      - name: Debug - Check Draw.io Export Logs
+      - name: Debug - Check Draw.io exported files
         run: |
-          echo "🔍 Checking Draw.io export logs..."
+          echo "🔍 Checking Draw.io export files..."
           ls -R docs/diagrams/exports || echo "⚠️ No exported files found!"
           docker ps -a || echo "⚠️ No running containers!"
-
-      - name: Debug - Inspect Draw.io Export Action Logs
-        run: docker ps -a && docker logs $(docker ps -l -q)
 
       - name: Debug - Show Git History
         run: git log --oneline -5
