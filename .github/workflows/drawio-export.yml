@@ -16,13 +16,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download and Install Draw.io CLI (AppImage)
+      - name: Install Draw.io CLI (Extract AppImage)
         run: |
           wget -q https://github.com/jgraph/drawio-desktop/releases/latest/download/latest-linux.yml -O latest.yml
           DRAWIO_FILENAME=$(grep -oP 'path:\s*\K.*' latest.yml | head -1)
-          wget -q "https://github.com/jgraph/drawio-desktop/releases/latest/download/$DRAWIO_FILENAME" -O drawio
-          chmod +x drawio
-          echo "DRAWIO_CLI=$(pwd)/drawio" >> $GITHUB_ENV
+          wget -q "https://github.com/jgraph/drawio-desktop/releases/latest/download/$DRAWIO_FILENAME" -O drawio.AppImage
+          chmod +x drawio.AppImage
+
+          # Extract AppImage since GitHub Actions lacks FUSE support
+          ./drawio.AppImage --appimage-extract
+          echo "DRAWIO_CLI=$(pwd)/squashfs-root/drawio" >> $GITHUB_ENV
 
       - name: Detect changed Draw.io files
         id: changed_files
