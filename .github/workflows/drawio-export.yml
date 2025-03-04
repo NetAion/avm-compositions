@@ -16,12 +16,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get latest Draw.io AppImage filename
+      - name: Install Draw.io CLI (AppImage)
         run: |
           wget -q https://github.com/jgraph/drawio-desktop/releases/latest/download/latest-linux.yml -O latest.yml
           DRAWIO_FILENAME=$(grep -oP 'path:\s*\K.*' latest.yml | head -1)
-          echo "Latest Draw.io AppImage: $DRAWIO_FILENAME"
-          echo "DRAWIO_FILENAME=$DRAWIO_FILENAME" >> $GITHUB_ENV
+          wget -q "https://github.com/jgraph/drawio-desktop/releases/latest/download/$DRAWIO_FILENAME" -O drawio
+          chmod +x drawio
+          echo "DRAWIO_CLI=$(pwd)/drawio" >> $GITHUB_ENV
 
       - name: Download and Install Draw.io CLI
         run: |
@@ -61,8 +62,8 @@ jobs:
             output_png="docs/diagrams/exports/$filename.png"
             output_svg="docs/diagrams/exports/$filename.svg"
 
-            drawio -x -f png -o "$output_png" "$file"
-            drawio -x -f svg -o "$output_svg" "$file"
+            $DRAWIO_CLI -x -f png -o "$output_png" "$file"
+            $DRAWIO_CLI -x -f svg -o "$output_svg" "$file"
 
             echo "✅ Exported: $output_png and $output_svg"
           done
