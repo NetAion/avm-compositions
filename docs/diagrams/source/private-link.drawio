@@ -245,7 +245,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-66" value="Private Link" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Private_Link.svg;imageBackground=#DDEDFD;labelBackgroundColor=#DDEDFD;" parent="1" vertex="1">
-          <mxGeometry x="670.42" y="195" width="40" height="36.67" as="geometry" />
+          <mxGeometry x="671.42" y="195" width="40" height="36.67" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-67" value="" style="whiteSpace=wrap;html=1;fillColor=default;rounded=1;arcSize=2;strokeWidth=2;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="760" y="350" width="240" height="101" as="geometry" />
