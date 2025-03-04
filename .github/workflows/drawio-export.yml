@@ -37,15 +37,20 @@ jobs:
           echo "FILES=$CHANGED" >> $GITHUB_ENV
           echo "✅ Changed files: $CHANGED"
 
-      - name: Convert only changed Draw.io files to PNG and SVG
-        if: env.FILES != ''
+      - name: Copy modified `.drawio` files to a temp directory
         run: |
-          mkdir -p docs/diagrams/exports
+          mkdir -p temp_drawio
           for file in $FILES; do
-            filename=$(basename "$file")
-            docker run --rm -v "$(pwd)":/workspace ghcr.io/rlespinasse/drawio-export-action:latest \
-              --input "/workspace/$file" --output "/workspace/docs/diagrams/exports" --format png,svg --transparent
+            cp "$file" temp_drawio/
           done
+
+      - name: Export only changed Draw.io diagrams
+        uses: rlespinasse/drawio-export-action@v3
+        with:
+          path: temp_drawio  # Input only modified files
+          output: docs/diagrams/exports  # Direct output to the main exports directory
+          format: png,svg
+          transparent: true
 
       - name: Commit exported files
         if: env.FILES != ''
@@ -55,3 +60,6 @@ jobs:
           git add docs/diagrams/exports/*.png docs/diagrams/exports/*.svg
           git commit -m "Auto-export updated Draw.io diagrams" || echo "No changes to commit"
           git push
+          
+      - name: Clean up temporary files
+        run: rm -rf temp_drawio
