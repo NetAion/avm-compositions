@@ -60,8 +60,9 @@ jobs:
             output_png="docs/diagrams/exports/$filename.png"
             output_svg="docs/diagrams/exports/$filename.svg"
 
-            $DRAWIO_CLI -x -f png -o "$output_png" "$file"
-            $DRAWIO_CLI -x -f svg -o "$output_svg" "$file"
+            # Run Draw.io without sandbox to prevent permission issues
+            $DRAWIO_CLI --no-sandbox -x -f png -o "$output_png" "$file"
+            $DRAWIO_CLI --no-sandbox -x -f svg -o "$output_svg" "$file"
 
             echo "✅ Exported: $output_png and $output_svg"
           done
