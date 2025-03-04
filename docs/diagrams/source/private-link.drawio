@@ -251,7 +251,7 @@
           <mxGeometry x="760" y="350" width="240" height="101" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-68" value="Gateway Subnet" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/networking/Subnet.svg;labelBackgroundColor=#DDEDFD;spacing=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=bottom;" parent="1" vertex="1">
-          <mxGeometry x="905" y="442" width="25" height="14.97" as="geometry" />
+          <mxGeometry x="902" y="442" width="25" height="14.97" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-69" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Public_IP_Addresses.svg;" parent="1" vertex="1">
           <mxGeometry x="799" y="392.89" width="32.5" height="26" as="geometry" />
