@@ -31,13 +31,26 @@ jobs:
       - name: Detect changed Draw.io files
         id: changed_files
         run: |
-          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
+          # Ensure we have enough commit history for comparison
+          git fetch --prune --unshallow || true
+
+          # Check if a previous commit exists before running git diff
+          if git rev-parse ${{ github.event.before }} >/dev/null 2>&1; then
+            CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
+          else
+            echo "⚠️ No previous commit found. Listing all .drawio files."
+            CHANGED=$(git ls-files -- 'docs/diagrams/source/*.drawio' || true)
+          fi
+
+          # Ensure CHANGED is empty if no modifications were detected
           if [[ -z "$CHANGED" ]]; then
             echo "No .drawio files changed."
             exit 0
           fi
+
           echo "FILES=$CHANGED" >> $GITHUB_ENV
           echo "✅ Changed files: $CHANGED"
+
 
       - name: Convert only changed Draw.io files to PNG and SVG
         if: env.FILES != ''
