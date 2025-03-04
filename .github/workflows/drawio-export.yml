@@ -1,4 +1,4 @@
-name: Auto Export Draw.io Diagrams (Only Changed Files)
+name: Auto Export Draw.io Diagrams
 
 on:
   push:
@@ -9,36 +9,19 @@ on:
       - 'docs/diagrams/source/*.drawio'
 
 jobs:
-  export-changed-diagrams:
+  export-diagrams:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Install Xvfb and Dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y xvfb libgtk-3-0 libasound2 libgbm1
-
-      - name: Install Draw.io CLI (Extract AppImage)
-        run: |
-          wget -q https://github.com/jgraph/drawio-desktop/releases/latest/download/latest-linux.yml -O latest.yml
-          DRAWIO_FILENAME=$(grep -oP 'path:\s*\K.*' latest.yml | head -1)
-          wget -q "https://github.com/jgraph/drawio-desktop/releases/latest/download/$DRAWIO_FILENAME" -O drawio.AppImage
-          chmod +x drawio.AppImage
-
-          # Extract AppImage since GitHub Actions lacks FUSE support
-          ./drawio.AppImage --appimage-extract
-          echo "DRAWIO_CLI=$(pwd)/squashfs-root/drawio" >> $GITHUB_ENV
+        with:
+          fetch-depth: 0  # Ensure full commit history
 
       - name: Detect changed Draw.io files
         id: changed_files
         run: |
-          # Ensure we have enough commit history for comparison
           git fetch --prune --unshallow || true
-
-          # Check if a previous commit exists before running git diff
           if git rev-parse ${{ github.event.before }} >/dev/null 2>&1; then
             CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
           else
@@ -46,7 +29,6 @@ jobs:
             CHANGED=$(git ls-files -- 'docs/diagrams/source/*.drawio' || true)
           fi
 
-          # Ensure CHANGED is empty if no modifications were detected
           if [[ -z "$CHANGED" ]]; then
             echo "No .drawio files changed."
             exit 0
@@ -55,8 +37,7 @@ jobs:
           echo "FILES=$CHANGED" >> $GITHUB_ENV
           echo "✅ Changed files: $CHANGED"
 
-
-      - name: Convert only changed Draw.io files to PNG and SVG
+      - name: Convert only changed Draw.io files to PNG and SVG using Docker
         if: env.FILES != ''
         run: |
           mkdir -p docs/diagrams/exports
@@ -65,9 +46,11 @@ jobs:
             output_png="docs/diagrams/exports/$filename.png"
             output_svg="docs/diagrams/exports/$filename.svg"
 
-            # Run Draw.io inside a virtual X server
-            xvfb-run -a $DRAWIO_CLI --no-sandbox -x -f png -o "$output_png" "$file"
-            xvfb-run -a $DRAWIO_CLI --no-sandbox -x -f svg -o "$output_svg" "$file"
+            docker run --rm -v "$(pwd)":/workspace jgraph/drawio \
+              drawio -x -f png -o "/workspace/$output_png" "/workspace/$file"
+
+            docker run --rm -v "$(pwd)":/workspace jgraph/drawio \
+              drawio -x -f svg -o "/workspace/$output_svg" "/workspace/$file"
 
             echo "✅ Exported: $output_png and $output_svg"
           done
