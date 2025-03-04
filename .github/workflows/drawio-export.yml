@@ -57,7 +57,8 @@ jobs:
           output: docs/diagrams/exports  # Export directly to the main directory
           format: png
           transparent: true
-          action-mode: verbose  # Force verbose mode
+          since-reference: ""  # Prevents using --git-ref
+          action-mode: force  # Prevents using --on-changes
 
       - name: Export only changed Draw.io diagrams (SVG)
         uses: rlespinasse/drawio-export-action@v2
@@ -66,13 +67,20 @@ jobs:
           output: docs/diagrams/exports
           format: svg
           transparent: true
-          action-mode: verbose  # Force verbose mode
+          since-reference: ""  # Prevents using --git-ref
+          action-mode: force  # Prevents using --on-changes          
 
       - name: Debug - Check Draw.io Export Logs
         run: |
           echo "🔍 Checking Draw.io export logs..."
           ls -R docs/diagrams/exports || echo "⚠️ No exported files found!"
           docker ps -a || echo "⚠️ No running containers!"
+
+      - name: Debug - Inspect Draw.io Export Action Logs
+        run: docker ps -a && docker logs $(docker ps -l -q)
+
+      - name: Debug - Show Git History
+        run: git log --oneline -5
 
       - name: Commit exported files
         if: env.FILES != ''
