@@ -64,9 +64,9 @@ jobs:
           output: docs/diagrams/exports  # Export directly to the main directory
           format: png
           transparent: true
-          #since-reference: ""  # Prevents using --git-ref
-          #internal_push_before: ""  # Explicitly disable commit-based filtering
-          #internal_push_forced: false  # Ensure all files are processed          
+          since-reference: ""  # Prevents using --git-ref
+          internal_push_before: ""  # Explicitly disable commit-based filtering
+          internal_push_forced: false  # Ensure all files are processed          
 
       - name: Export only changed Draw.io diagrams (SVG)
         uses: rlespinasse/drawio-export-action@v2
@@ -75,9 +75,9 @@ jobs:
           output: docs/diagrams/exports
           format: svg
           transparent: true
-          #since-reference: ""  # Prevents using --git-ref
-          #internal_push_before: ""  # Explicitly disable commit-based filtering
-          #internal_push_forced: false  # Ensure all files are processed       
+          since-reference: ""  # Prevents using --git-ref
+          internal_push_before: ""  # Explicitly disable commit-based filtering
+          internal_push_forced: false  # Ensure all files are processed       
 
       - name: Debug - Check Draw.io exported files
         run: |
