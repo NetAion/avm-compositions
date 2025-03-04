@@ -47,27 +47,32 @@ jobs:
       - name: Debug - List files before running Draw.io export
         run: ls -R temp_drawio || echo "⚠️ temp_drawio is empty!"
 
-      - name: Export Draw.io diagrams to PNG
+      - name: Debug - Print Environment Variables
+        run: env
+
+      - name: Export only changed Draw.io diagrams (PNG)
         uses: rlespinasse/drawio-export-action@v2
         with:
-          path: temp_drawio
-          output: docs/diagrams/exports
+          path: temp_drawio  # Process only modified files
+          output: docs/diagrams/exports  # Export directly to the main directory
           format: png
           transparent: true
+          action-mode: verbose  # Force verbose mode
 
-      - name: Export Draw.io diagrams to SVG
+      - name: Export only changed Draw.io diagrams (SVG)
         uses: rlespinasse/drawio-export-action@v2
         with:
           path: temp_drawio
           output: docs/diagrams/exports
           format: svg
           transparent: true
+          action-mode: verbose  # Force verbose mode
 
-      - name: Debug - Check Draw.io Export Action Logs
+      - name: Debug - Check Draw.io Export Logs
         run: |
           echo "🔍 Checking Draw.io export logs..."
           ls -R docs/diagrams/exports || echo "⚠️ No exported files found!"
-          docker logs $(docker ps -a -q --filter "ancestor=ghcr.io/rlespinasse/drawio-export-action:latest") || echo "⚠️ No logs found!"
+          docker ps -a || echo "⚠️ No running containers!"
 
       - name: Commit exported files
         if: env.FILES != ''
