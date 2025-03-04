@@ -72,7 +72,7 @@ jobs:
         uses: rlespinasse/drawio-export-action@v2
         with:
           path: temp_drawio
-          output: docs/diagrams/exports
+          output: ../docs/diagrams/exports
           format: svg
           transparent: true
           since-reference: ""  # Prevents using --git-ref
