@@ -63,8 +63,11 @@ jobs:
           format: svg
           transparent: true
 
-      - name: Debug - List output files after Draw.io export
-        run: ls -R docs/diagrams/exports || echo "⚠️ No files exported!"
+      - name: Debug - Check Draw.io Export Action Logs
+        run: |
+          echo "🔍 Checking Draw.io export logs..."
+          ls -R docs/diagrams/exports || echo "⚠️ No exported files found!"
+          docker logs $(docker ps -a -q --filter "ancestor=ghcr.io/rlespinasse/drawio-export-action:latest") || echo "⚠️ No logs found!"
 
       - name: Commit exported files
         if: env.FILES != ''
