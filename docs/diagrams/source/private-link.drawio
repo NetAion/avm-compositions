@@ -283,8 +283,8 @@
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-77" value="Flow Runtime&lt;br&gt;&lt;div&gt;VM&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Virtual_Machine.svg;" parent="1" vertex="1">
           <mxGeometry x="1073.83" y="197" width="32.34" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2uqbH7pq5RH6AmWOPkkg-78" value="Runtime&amp;nbsp;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: light-dark(rgb(221, 237, 253), rgb(23, 37, 50));&quot;&gt;VNet&lt;/span&gt;" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/networking/Virtual_Networks.svg;imageBackground=#DDEDFD;labelBackgroundColor=#DDEDFD;spacing=0;verticalAlign=top;" parent="1" vertex="1">
-          <mxGeometry x="1049" y="465" width="25" height="14.93" as="geometry" />
+        <mxCell id="2uqbH7pq5RH6AmWOPkkg-78" value="Runtime&amp;nbsp;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: light-dark(rgb(221, 237, 253), rgb(23, 37, 50));&quot;&gt;VNet&lt;/span&gt;" style="image;aspect=fixed;html=1;points=[];align=right;fontSize=12;image=img/lib/azure2/networking/Virtual_Networks.svg;imageBackground=#DDEDFD;labelBackgroundColor=#DDEDFD;spacing=0;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="1111" y="465" width="25" height="14.93" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-79" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;bendable=1;orthogonal=0;ignoreEdge=0;endFill=1;noJump=0;strokeColor=default;endArrow=blockThin;startFill=0;strokeWidth=3;exitX=1.01;exitY=0.324;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.003;entryY=0.324;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2uqbH7pq5RH6AmWOPkkg-58" target="2uqbH7pq5RH6AmWOPkkg-75" edge="1">
           <mxGeometry relative="1" as="geometry">
