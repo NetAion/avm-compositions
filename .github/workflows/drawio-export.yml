@@ -93,9 +93,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-
-          # Set GitHub token as authentication for push
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
 
           # Verify if PNG/SVG files exist before adding them
           if ls docs/diagrams/exports/*.png 1> /dev/null 2>&1 || ls docs/diagrams/exports/*.svg 1> /dev/null 2>&1; then
@@ -106,7 +104,7 @@ jobs:
             echo "⚠️ No exported PNG/SVG files found. Skipping commit."
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Clean up temporary files
         run: rm -rf temp_drawio
