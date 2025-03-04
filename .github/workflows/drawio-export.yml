@@ -61,7 +61,7 @@ jobs:
         uses: rlespinasse/drawio-export-action@v2
         with:
           path: temp_drawio  # Process only modified files
-          output: docs/diagrams/exports  # Export directly to the main directory
+          output: ../docs/diagrams/exports  # Export directly to the main directory
           format: png
           transparent: true
           since-reference: ""  # Prevents using --git-ref
