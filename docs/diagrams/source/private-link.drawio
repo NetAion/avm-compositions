@@ -1,5 +1,5 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.16">
-  <diagram name="Page-1" id="2Q9V9P2lFE7lSomWzaya">
+  <diagram name="to-hub-private-endpoint" id="2Q9V9P2lFE7lSomWzaya">
     <mxGraphModel dx="1166" dy="666" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -221,7 +221,7 @@
           <mxGeometry x="750" y="90" width="260" height="384" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-59" value="Connectors&amp;nbsp;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: light-dark(rgb(221, 237, 253), rgb(23, 37, 50));&quot;&gt;VNet&lt;/span&gt;" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/networking/Virtual_Networks.svg;imageBackground=#DDEDFD;labelBackgroundColor=#DDEDFD;spacing=0;verticalAlign=top;" parent="1" vertex="1">
-          <mxGeometry x="755" y="465" width="25" height="14.93" as="geometry" />
+          <mxGeometry x="756" y="465" width="25" height="14.93" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-60" value="" style="whiteSpace=wrap;html=1;fillColor=default;rounded=1;arcSize=2;strokeWidth=2;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="760" y="100" width="240" height="210" as="geometry" />
