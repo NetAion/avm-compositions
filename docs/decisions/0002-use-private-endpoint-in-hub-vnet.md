@@ -36,7 +36,7 @@ Chosen option: "Private Endpoint in Hub VNet", because it aligns with the WAF pi
 ### Consequences
 
 * Good operationally, because it enables options for streamlined, standard, and safe deployment practices through automation, such as the recently updated [Azure Verified Modules for Platform Landing Zones (ALZ)](https://azure.github.io/Azure-Landing-Zones/terraform/). E.g., a [Private Endpoint module](https://azure.github.io/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/) exists in the [AVM catalog](https://azure.github.io/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/).
-* Good security, because policies can be managed centrally when traffic flows through the firewall Network Virtual Appliances (NVA) in the Azure Hub VNet.
+* Good security, because policies can be managed centrally when traffic flows through the firewall Network Virtual Appliances (NVA) in the Azure Hub VNet. Refer to traffic flow arrows in [the conceptual design diagram further below](#conceptual-design-diagram-for-private-endpoint-in-hub-vnet).
 * Good reliability and cost optimisation, because a single deployed Private Endpoint that all peered Spoke VNets can access scales well.
 
 ## More Information
@@ -51,8 +51,8 @@ See [Azure Private Link Service Overview](https://learn.microsoft.com/en-us/azur
 
 ### Conceptual Design Diagram for Private Endpoint in Hub VNet
 
-A proposed deployment of a Private Endpoint in a Hub VNet that satisfies this decision record follows:
+The following diagram shows the proposed deployment of a Private Endpoint in a Hub VNet that satisfies this decision record. Refer to the arrows for data plane traffic flowing from sources to Estuary Flow Private Deployment Connectors.
 
 ![Private Endpoint in Azure Hub VNet](../diagrams/exports/private-link.png)
 
-[Edit above diagram in Draw.io](https://app.diagrams.net/#Uhttps://raw.githubusercontent.com/NetAion/avm-compositions/dev-private-link/docs/diagrams/source/private-link.drawio)
+[Edit a copy of the above diagram (from the main branch) in Draw.io](https://app.diagrams.net/#Uhttps://raw.githubusercontent.com/NetAion/avm-compositions/main/docs/diagrams/source/private-link.drawio)
