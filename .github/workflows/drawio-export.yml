@@ -1,4 +1,4 @@
-name: Auto Export Draw.io Diagrams
+name: Keep draw.io export synchronized
 
 on:
   push:
@@ -8,88 +8,37 @@ on:
     paths:
       - 'docs/diagrams/source/*.drawio'
 
-jobs:
-  export-diagrams:
-    runs-on: ubuntu-latest
+concurrency:
+  group: drawio-export-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
+  drawio-export:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensure full commit history
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Detect changed Draw.io files
-        id: changed_files
-        run: |
-          # Check if the repository is shallow before attempting to unshallow it
-          if [ -f .git/shallow ]; then
-            git fetch --prune --unshallow
-          else
-            git fetch --prune
-          fi
-
-          if git rev-parse ${{ github.event.before }} >/dev/null 2>&1; then
-            CHANGED=$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }} -- 'docs/diagrams/source/*.drawio' || true)
-          else
-            echo "⚠️ No previous commit found. Listing all .drawio files."
-            CHANGED=$(git ls-files -- 'docs/diagrams/source/*.drawio' || true)
-          fi
-
-          # Ensure CHANGED is empty if no modifications were detected
-          if [[ -z "$CHANGED" ]]; then
-            echo "No .drawio files changed."
-            exit 0
-          fi
-
-          echo "FILES=$CHANGED" >> $GITHUB_ENV
-          echo "✅ Changed files: $CHANGED"
-
-      - name: Copy modified `.drawio` files to a temp directory
-        run: |
-          mkdir -p temp_drawio
-          for file in $FILES; do
-            cp "$file" temp_drawio/
-          done
-
-      - name: Debug - List files before running Draw.io export
-        run: ls -R temp_drawio || echo "⚠️ temp_drawio is empty!"
-
-      - name: Export only changed Draw.io diagrams (PNG)
+      - name: Export drawio files to png files
         uses: rlespinasse/drawio-export-action@v2
         with:
-          path: temp_drawio  # Process only modified files
-          output: ../docs/diagrams/exports  # Export directly to the main directory
+          path: docs/diagrams/source
           format: png
           transparent: true
-          since-reference: ""  # Prevents using --git-ref
-          internal_push_before: ""  # Explicitly disable commit-based filtering
-          internal_push_forced: false  # Ensure all files are processed
+          output: ../exports
 
-      - name: Debug - Check Draw.io exported files
-        run: |
-          echo "🔍 Checking Draw.io export files..."
-          ls -R docs/diagrams/exports || echo "⚠️ No exported files found!"
-          docker ps -a || echo "⚠️ No running containers!"
+      - name: Get author and committer info from HEAD commit
+        uses: rlespinasse/git-commit-data-action@v1
+        #if: github.ref == 'refs/heads/main'
 
-      - name: Commit exported files
-        if: env.FILES != ''
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions@github.com"
-
-          # Set GitHub token as authentication for push
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-
-          # Verify if PNG files exist before adding them
-          if ls docs/diagrams/exports/*.png 1> /dev/null 2>&1; then
-            git add docs/diagrams/exports/*.png
-            git commit -m "Auto-export updated Draw.io diagrams" || echo "No changes to commit"
-            git push origin ${{ github.ref_name }}
-          else
-            echo "⚠️ No exported files found. Skipping commit."
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clean up temporary files
-        run: rm -rf temp_drawio
+      - name: Commit changed files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "docs: sync draw.io exported files"
+          commit_user_name: "${{ env.GIT_COMMIT_COMMITTER_NAME }}"
+          commit_user_email: "${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
+          commit_author: "${{ env.GIT_COMMIT_AUTHOR }}"
+        #if: github.ref == 'refs/heads/main'
