@@ -54,9 +54,6 @@ jobs:
       - name: Debug - List files before running Draw.io export
         run: ls -R temp_drawio || echo "⚠️ temp_drawio is empty!"
 
-      - name: Debug - Print Environment Variables
-        run: env
-
       - name: Export only changed Draw.io diagrams (PNG)
         uses: rlespinasse/drawio-export-action@v2
         with:
@@ -66,27 +63,13 @@ jobs:
           transparent: true
           since-reference: ""  # Prevents using --git-ref
           internal_push_before: ""  # Explicitly disable commit-based filtering
-          internal_push_forced: false  # Ensure all files are processed          
-
-      - name: Export only changed Draw.io diagrams (SVG)
-        uses: rlespinasse/drawio-export-action@v2
-        with:
-          path: temp_drawio
-          output: ../docs/diagrams/exports
-          format: svg
-          transparent: true
-          since-reference: ""  # Prevents using --git-ref
-          internal_push_before: ""  # Explicitly disable commit-based filtering
-          internal_push_forced: false  # Ensure all files are processed       
+          internal_push_forced: false  # Ensure all files are processed
 
       - name: Debug - Check Draw.io exported files
         run: |
           echo "🔍 Checking Draw.io export files..."
           ls -R docs/diagrams/exports || echo "⚠️ No exported files found!"
           docker ps -a || echo "⚠️ No running containers!"
-
-      - name: Debug - Show Git History
-        run: git log --oneline -5
 
       - name: Commit exported files
         if: env.FILES != ''
@@ -97,13 +80,13 @@ jobs:
           # Set GitHub token as authentication for push
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
-          # Verify if PNG/SVG files exist before adding them
-          if ls docs/diagrams/exports/*.png 1> /dev/null 2>&1 || ls docs/diagrams/exports/*.svg 1> /dev/null 2>&1; then
-            git add docs/diagrams/exports/*.png docs/diagrams/exports/*.svg
+          # Verify if PNG files exist before adding them
+          if ls docs/diagrams/exports/*.png 1> /dev/null 2>&1; then
+            git add docs/diagrams/exports/*.png
             git commit -m "Auto-export updated Draw.io diagrams" || echo "No changes to commit"
             git push origin ${{ github.ref_name }}
           else
-            echo "⚠️ No exported PNG/SVG files found. Skipping commit."
+            echo "⚠️ No exported files found. Skipping commit."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
