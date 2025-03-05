@@ -4,9 +4,6 @@ on:
   push:
     paths:
       - 'docs/diagrams/source/*.drawio'
-  pull_request:
-    paths:
-      - 'docs/diagrams/source/*.drawio'
 
 concurrency:
   group: drawio-export-${{ github.ref }}
