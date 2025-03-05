@@ -46,7 +46,7 @@
           <mxGeometry x="273" y="367" width="257" height="80" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-13" value="ExpressRoute&lt;div&gt;Gateway&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Virtual_Network_Gateways.svg;labelBackgroundColor=none;spacing=0;" parent="1" vertex="1">
-          <mxGeometry x="337" y="375" width="28.64" height="38" as="geometry" />
+          <mxGeometry x="336" y="375" width="28.64" height="38" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-14" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=blockThin;startFill=0;strokeColor=#000000;strokeWidth=3;endFill=1;" parent="1" source="2uqbH7pq5RH6AmWOPkkg-16" target="2uqbH7pq5RH6AmWOPkkg-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
