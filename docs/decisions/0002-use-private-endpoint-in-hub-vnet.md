@@ -41,7 +41,7 @@ Chosen option: "Private Endpoint in Hub VNet", because it aligns with the WAF pi
 
 ## More Information
 
-[ADR-0001](0001-use-estuary-flow-private-deployment) reasons about selecting the Estuary Flow Private Deployment.
+[ADR-0001](0001-use-estuary-flow-private-deployment.md) reasons about selecting the Estuary Flow Private Deployment.
 
 ### Reference Design for Private Link Service
 
