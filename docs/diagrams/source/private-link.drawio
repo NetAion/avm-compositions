@@ -21,13 +21,13 @@
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-4" value="" style="whiteSpace=wrap;html=1;fillColor=none;rounded=1;arcSize=2;dashed=1;dashPattern=1 1;strokeWidth=2;strokeColor=#007FFF;" parent="1" vertex="1">
           <mxGeometry x="53" y="90" width="127" height="384" as="geometry" />
         </mxCell>
-        <mxCell id="2uqbH7pq5RH6AmWOPkkg-5" value="&lt;span data-lucid-type=&quot;application/vnd.lucid.text&quot; data-lucid-content=&quot;{&amp;quot;t&amp;quot;:&amp;quot;Azure East Australia Region (Sydney, EAu)&amp;quot;,&amp;quot;m&amp;quot;:[{&amp;quot;s&amp;quot;:6,&amp;quot;n&amp;quot;:&amp;quot;c&amp;quot;,&amp;quot;v&amp;quot;:&amp;quot;333333ff&amp;quot;,&amp;quot;e&amp;quot;:41},{&amp;quot;s&amp;quot;:6,&amp;quot;n&amp;quot;:&amp;quot;s&amp;quot;,&amp;quot;v&amp;quot;:17.77777777777777,&amp;quot;e&amp;quot;:41}]}&quot;&gt;Microsoft Azure,&amp;nbsp;&lt;span style=&quot;color:#333333;font-size:13.333333333333329px;&quot;&gt;Australia East Region (Sydney, AuE)&lt;/span&gt;&lt;/span&gt;" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/other/Azure_A.svg;labelPosition=right;verticalLabelPosition=top;verticalAlign=bottom;spacing=0;fontStyle=1" parent="1" vertex="1">
+        <mxCell id="2uqbH7pq5RH6AmWOPkkg-5" value="&lt;span data-lucid-content=&quot;{&amp;quot;t&amp;quot;:&amp;quot;Azure East Australia Region (Sydney, EAu)&amp;quot;,&amp;quot;m&amp;quot;:[{&amp;quot;s&amp;quot;:6,&amp;quot;n&amp;quot;:&amp;quot;c&amp;quot;,&amp;quot;v&amp;quot;:&amp;quot;333333ff&amp;quot;,&amp;quot;e&amp;quot;:41},{&amp;quot;s&amp;quot;:6,&amp;quot;n&amp;quot;:&amp;quot;s&amp;quot;,&amp;quot;v&amp;quot;:17.77777777777777,&amp;quot;e&amp;quot;:41}]}&quot; data-lucid-type=&quot;application/vnd.lucid.text&quot;&gt;Microsoft Azure,&amp;nbsp;&lt;span style=&quot;color:#333333;font-size:13.333333333333329px;&quot;&gt;Australia East Region (Sydney, AuE)&lt;/span&gt;&lt;/span&gt;" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/other/Azure_A.svg;labelPosition=right;verticalLabelPosition=top;verticalAlign=bottom;spacing=0;fontStyle=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="16.18" y="21" width="31.82" height="30" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-6" value="" style="whiteSpace=wrap;html=1;fillColor=#E6E6E6;rounded=1;arcSize=2;strokeWidth=2;strokeColor=none;imageAspect=1;resizeHeight=0;resizeWidth=0;gradientColor=none;" parent="1" vertex="1">
           <mxGeometry x="197" y="650" width="420.82" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="2uqbH7pq5RH6AmWOPkkg-7" value="On-Premises" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/other/Exchange_On_Premises_Access.svg;labelPosition=right;verticalLabelPosition=top;verticalAlign=bottom;spacingRight=-2;spacing=0;fontStyle=1" parent="1" vertex="1">
+        <mxCell id="2uqbH7pq5RH6AmWOPkkg-7" value="On-Premises" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=12;image=img/lib/azure2/other/Exchange_On_Premises_Access.svg;labelPosition=right;verticalLabelPosition=top;verticalAlign=bottom;spacingRight=-2;spacing=0;fontStyle=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="208" y="647" width="23.53" height="40" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-8" value="" style="whiteSpace=wrap;html=1;fillColor=none;rounded=1;arcSize=2;dashed=1;dashPattern=1 1;strokeWidth=2;strokeColor=#007FFF;glass=0;" parent="1" vertex="1">
@@ -60,7 +60,7 @@
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-17" value="Gateway Subnet" style="image;aspect=fixed;html=1;points=[];align=right;fontSize=12;image=img/lib/azure2/networking/Subnet.svg;labelBackgroundColor=#DDEDFD;spacing=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=bottom;" parent="1" vertex="1">
           <mxGeometry x="482" y="438" width="25" height="14.97" as="geometry" />
         </mxCell>
-        <mxCell id="2uqbH7pq5RH6AmWOPkkg-18" value="ExpressRoute Circuit" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/ExpressRoute_Circuits.svg;imageBackground=default;spacing=0;" parent="1" vertex="1">
+        <mxCell id="2uqbH7pq5RH6AmWOPkkg-18" value="ExpressRoute Circuit" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/ExpressRoute_Circuits.svg;imageBackground=#FFFFFF;spacing=0;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="383" y="547" width="43.75" height="40" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-19" value="Server Subnet" style="whiteSpace=wrap;html=1;fillColor=default;rounded=1;arcSize=2;strokeWidth=2;strokeColor=none;labelPosition=center;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" vertex="1">
@@ -271,7 +271,7 @@
             <mxPoint x="527" y="459" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2uqbH7pq5RH6AmWOPkkg-74" value="" style="verticalLabelPosition=bottom;sketch=0;html=1;fillColor=#666666;strokeColor=none;verticalAlign=top;pointerEvents=1;align=center;shape=mxgraph.cisco_safe.iot_things_icons.icon47;" parent="1" vertex="1">
+        <mxCell id="2uqbH7pq5RH6AmWOPkkg-74" value="" style="verticalLabelPosition=bottom;sketch=0;html=1;fillColor=#666666;strokeColor=none;verticalAlign=top;pointerEvents=1;align=center;shape=mxgraph.cisco_safe.iot_things_icons.icon47;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="726" y="562" width="40" height="40" as="geometry" />
         </mxCell>
         <mxCell id="2uqbH7pq5RH6AmWOPkkg-75" value="" style="whiteSpace=wrap;html=1;fillColor=none;rounded=1;arcSize=2;dashed=1;dashPattern=1 1;strokeWidth=2;strokeColor=#007FFF;glass=0;" parent="1" vertex="1">
