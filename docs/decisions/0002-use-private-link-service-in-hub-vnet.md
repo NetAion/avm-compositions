@@ -12,7 +12,7 @@ informed:
 
 We aim to provide secure access between our 3rd-party managed Estuary Flow Private Deployment (compute) data plane in Azure Australia East and our various targets and sources, both within the same Azure region and on-premises. To achieve this, we need to determine the most suitable private connectivity option.
 
-Refer to [Azure Private Link](#azure-private-link) for a summary of the Azure components and Microsoft's reference architecture applicable to this use case.
+Refer to [Reference Design](#reference-design) for a summary of the Azure components and Microsoft's reference architecture applicable to this use case.
 
 ## Decision Drivers
 
@@ -33,7 +33,7 @@ Align with the [Estuary Flow Private Deployment option](https://docs.estuary.dev
 
 ## Decision Outcome
 
-Chosen option: "Single Azure Private Link Service in Hub VNet", because it provides centralised and scalable traffic management, and it aligns with Estuary's recommendation that we act as service provider to their private deployment as service consumer.
+Chosen option: "Single Azure Private Link Service in Hub VNet," because it provides centralised and scalable traffic management and aligns with Estuary's recommendation that we act as the service provider tenant to their private deployment tenant, which functions as the service consumer.
 
 ## Pros and Cons of the Options
 
@@ -70,16 +70,14 @@ Chosen option: "Single Azure Private Link Service in Hub VNet", because it provi
 
 ### Reference Design
 
-#### Azure Private Link
-
 [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) enables private access to Azure PaaS services or private connectivity between resources across different Microsoft Entra ID tenants. Traffic is routed over the Microsoft backbone network instead of the public internet, enhancing security and reducing exposure.
 
 The two use cases for enabling private connectivity each leverage specific Azure components:
 
-1. From Azure IaaS resources to Azure PaaS services:
+1. Access from Azure IaaS resources to Azure PaaS services:
     * [Private Endpoint](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview), a network interface in the consumer’s tenant and virtual network, mapped to a PaaS service.
 
-2. Between Azure IaaS resources across different Microsoft Entra ID tenants:
+2. Connectivity between Azure IaaS resources across different Microsoft Entra ID tenants:
     * [Private Link Service](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview), in the service provider’s tenant and virtual network, providing access to services behind a Standard Load Balancer.
     * [Private Endpoint](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview), a network interface in the service consumer’s tenant and virtual network, mapped to the Private Link Service.
 
