@@ -40,6 +40,7 @@ Chosen option: "Single Azure Private Link Service in Hub VNet," because it provi
 ### Single Azure Private Link Service in Hub VNet
 
 * Good reliability, because Estuary recommends that we act as the "service provider" tenant with a Private Link Service, while their "service consumer" tenant uses a Private Endpoint.
+* Good reliability, because it aligns with Microsoft's [Azure Private Link](#reference-design) and [Private Link in a hub-and-spoke network](https://learn.microsoft.com/en-us/azure/architecture/networking/guide/private-link-hub-spoke-network) reference architectures. However, note that the "service provider" and "service consumer" roles are defined from the perspective of Estuary Flow change data capture (CDC) as the consumer. This differs from many ISV SaaS and PaaS models, where the commercial subscription host is typically the service provider.
 * Good security and visibility, because policies can be managed centrally when traffic flows through the firewall Network Virtual Appliances (NVA) in the Azure Hub VNet. Refer to traffic flow arrows in [the chosen conceptual design below](#chosen-option-single-azure-private-link-service-in-hub-vnet).
 * Good cost optimisation, and good operationally, because a single Private Link Service accessible to all peered Spoke VNets scales well.
 * Neutral operationally, because it enables **customised** and safe deployment practices with automation using [Azure Verified Modules for Platform Landing Zones (ALZ)](https://azure.github.io/Azure-Landing-Zones/terraform/). A Private Link Service only exists in the [AVM **proposed** module catalog (number 41)](https://azure.github.io/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/#proposed-modules---), therefore further customisation is required.
@@ -47,10 +48,10 @@ Chosen option: "Single Azure Private Link Service in Hub VNet," because it provi
 ### Single Azure Private Endpoint in Hub VNet
 
 * Bad reliability, because Estuary does not recommend that our "service consumer" tenant uses a Private Endpoint while they act as the "service provider" tenant with a Private Link Service.
+* Good reliability, because it aligns with Microsoft's [Azure Private Link](#reference-design) and [Private Link in a hub-and-spoke network](https://learn.microsoft.com/en-us/azure/architecture/networking/guide/private-link-hub-spoke-network) reference architectures.
 * Good security and visibility, because policies can be managed centrally when traffic flows through the firewall Network Virtual Appliances (NVA) in the Azure Hub VNet. Refer to traffic flow arrows in [the considered conceptual design below](#not-selected-single-azure-private-endpoint-in-hub-vnet).
 * Good cost optimisation, and good operationally, because a single Private Endpoint accessible to all peered Spoke VNets scales well.
 * Good operationally, because it enables **standardised** and safe deployment practices with automation using [Azure Verified Modules for Platform Landing Zones (ALZ)](https://azure.github.io/Azure-Landing-Zones/terraform/). A [Private Endpoint module](https://registry.terraform.io/modules/Azure/avm-res-network-privateendpoint/azurerm/latest) exists in the [AVM **published** module catalog (number 63)](https://azure.github.io/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/#published-modules-----).
-* Good operationally, because it aligns with the [Azure Private Link in a hub-and-spoke network](https://learn.microsoft.com/en-us/azure/architecture/networking/guide/private-link-hub-spoke-network) reference architecture.
 
 ### Multiple Azure Private Link Services in Spoke VNets
 
