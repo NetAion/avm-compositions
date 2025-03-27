@@ -26,7 +26,7 @@ Chosen option: "Private Deployment", because it offers the security and control 
 
 ### Private Deployment
 
-* Good **security**, because data and processing remains within our private network and dedicated (compute) data plane, offering improved protection, segmented from other tenants.
+* Good **security**, because data and processing remains within our private network and dedicated data plane, offering improved protection, segmented from other tenants.
 * Good **operational simplicity**, because we can do away with (explicit) SSH tunnelling over the internet thanks to private peering options.
 * Good **immutable infrastructure**, because security and maintenance updates are seamlessly integrated by Estuary without disruption.
 * Good **data movement**, because it allows for seamless data migration between regions.
@@ -35,7 +35,7 @@ Chosen option: "Private Deployment", because it offers the security and control 
 
 With BYOC, we can deploy Estuary Flow directly within our own cloud environment.
 
-* Good **security**, because data and processing remains within our private network and dedicated (compute) data plane, offering improved protection, away from other tenants.
+* Good **security**, because data and processing remains within our private network and dedicated data plane, offering improved protection, away from other tenants.
 * Good **operational simplicity**, because we can do away with (explicit) SSH tunnelling over the internet thanks to private peering options.
 * Good **cost savings**, because of potential to reduce costs by using our existing cloud infrastructure and negotiated pricing.
 * Bad **operational simplicity**, because our HPE GreenLake private cloud is not supported. Therefore, updates and maintenance are unavailable as a fully managed service.

@@ -10,16 +10,16 @@ informed:
 
 ## Context and Problem Statement
 
-We aim to provide secure access between our 3rd-party managed Estuary Flow Private Deployment (compute) data plane in Azure Australia East and our various targets and sources, both within the same Azure region and on-premises. To achieve this, we need to determine the most suitable private connectivity option.
+We aim to provide secure access between our 3rd-party managed Estuary Flow Private Deployment data plane in Azure Australia East and our various change data capture (CDC) targets and sources, both within the same Azure region and on-premises. To achieve this, we need to determine the most suitable private connectivity option.
 
-Refer to [Reference Design](#reference-design) for a summary of the Azure components and Microsoft's reference architecture applicable to this use case.
+Refer to [Reference Design](#reference-design) for a summary of the Azure Private Link components and Microsoft's reference architecture applicable to this use case. Additional considerations relating to the number of components are recorded in [ADR-0003](0003-use-dedicated-private-link-service-and-private-endpoint-pair-per-cdc-source-or-target.md)
 
 ## Decision Drivers
 
 Align with the [Estuary Flow Private Deployment option](https://docs.estuary.dev/getting-started/deployment-options/#private-deployment) using Azure Private Link, and the design principles of the [Azure Well-Architected Framework (WAF)](https://learn.microsoft.com/en-us/azure/well-architected/pillars) pillars at the workload level:
 
 * Operational Excellence
-* Cost Optimization
+* Cost Optimisation
 * Security
 * Reliability
 * Performance Efficiency
@@ -40,7 +40,7 @@ Chosen option: "Azure Private Link Service(s) in Hub VNet," because it provides 
 ### Azure Private Link Service(s) in Hub VNet
 
 * Good reliability, because Estuary recommends that we act as the "service provider" tenant with a Private Link Service, while their "service consumer" tenant uses a Private Endpoint.
-* Good reliability, because it aligns with Microsoft's [Azure Private Link](#reference-design) and [Private Link in a hub-and-spoke network](https://learn.microsoft.com/en-us/azure/architecture/networking/guide/private-link-hub-spoke-network) reference architectures. However, note that the "service provider" and "service consumer" roles are defined from the perspective of Estuary Flow change data capture (CDC) as the consumer. This differs from many ISV SaaS and PaaS models, where the commercial subscription host is typically the service provider.
+* Good reliability, because it aligns with Microsoft's [Azure Private Link](#reference-design) and [Private Link in a hub-and-spoke network](https://learn.microsoft.com/en-us/azure/architecture/networking/guide/private-link-hub-spoke-network) reference architectures. However, note that the "service provider" and "service consumer" roles are defined from the perspective of Estuary Flow CDC as the consumer. This differs from many ISV SaaS and PaaS models, where the commercial subscription host is typically the service provider.
 * Good security and visibility, because policies can be managed centrally when traffic flows through the firewall Network Virtual Appliances (NVA) in the Azure Hub VNet. Refer to traffic flow arrows in [the chosen conceptual design below](#chosen-option-azure-private-link-services-in-hub-vnet).
 * Good operationally, because a Private Link Service accessible to all peered Spoke VNets scales well.
 * Neutral operationally, because it enables **customised** and safe deployment practices with automation using [Azure Verified Modules for Platform Landing Zones (ALZ)](https://azure.github.io/Azure-Landing-Zones/terraform/). A Private Link Service only exists in the [AVM **proposed** module catalog (number 41)](https://azure.github.io/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/#proposed-modules---), therefore further customisation is required.

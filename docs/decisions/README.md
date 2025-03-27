@@ -7,6 +7,7 @@ The following decisions have been considered by the project team. Refer to the m
 * [ADR-0000, Use Markdown Architectural Decision Records](0000-use-markdown-architectural-decision-records.md)
 * [ADR-0001, Use Estuary Flow Private Deployment](0001-use-estuary-flow-private-deployment.md)
 * [ADR-0002, Use Private Link Service in Hub VNet for Private Deployment](0002-use-private-link-service-in-hub-vnet.md)
+* [ADR-0003, Use a dedicated Private Link Service and Private Endpoint pair per CDC source or target](0003-use-dedicated-private-link-service-and-private-endpoint-pair-per-cdc-source-or-target.md)
 
 ## Contributing to Documentation
 
