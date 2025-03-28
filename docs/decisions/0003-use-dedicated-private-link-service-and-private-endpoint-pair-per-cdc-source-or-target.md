@@ -6,7 +6,7 @@ consulted:
 informed: 
 ---
 
-# Use a dedicated Private Link Service and Private Endpoint pair per CDC source or target, with IP-to-IP mapping
+# Use a dedicated Private Link Service and Private Endpoint pair per CDC source or target, with IP address mapping
 
 ## Context and Problem Statement
 
@@ -24,24 +24,24 @@ Align with the [Estuary Flow Private Deployment option](https://docs.estuary.dev
 
 ## Considered Options
 
-* Dedicated Azure private link service and private endpoint pair per CDC source or target, with IP-to-IP mapping
+* Dedicated Azure private link service and private endpoint pair per CDC source or target, with IP address mapping
 * Single Azure private link for all CDC sources and targets, with TCP/UDP port to IP mapping
 * Single Azure private link service, dedicated private endpoint per CDC source or target, with TCP Proxy v2
 
 ## Decision Outcome
 
-Chosen option: "Dedicated private link service and private endpoint pair per CDC source or target, with IP-to-IP mapping", because it is operationally simpler than the alternatives.
+Chosen option: "Dedicated private link service and private endpoint pair per CDC source or target, with IP address mapping", because it is operationally simpler than the alternatives.
 
 ## Pros and Cons of the Options
 
-### Dedicated Azure private link service and private endpoint pair per CDC source or target, with IP-to-IP mapping
+### Dedicated Azure private link service and private endpoint pair per CDC source or target, with IP address mapping
 
-**Method:** provision a dedicated private link service (PLS) and private endpoint (PE) pair for each CDC source or target. Use the following IP-to-IP mapping scheme for each CDC source or target, with standard address translation/resolution methods managed by each team.
+**Method:** provision a dedicated private link service (PLS) and private endpoint (PE) pair for each CDC source or target. Use the following IP address mapping scheme for each CDC source or target, with standard address translation/resolution methods managed by each team.
 
 |Entry Id.| Match                         | -> Map To                       | Translation Method | Entry Managed By |
 |---------|-------------------------------|---------------------------------|--------------------|------------------|
-| 1a      | CDC source or target DNS name | PE IP address                   | DNS Resolver       | Estuary Team </br>(Private Link "Consumer Tenant") |
-| 1b      | PLS SNAT IP address           | CDC source or target IP address in landing zone VNet or on-prem network | Firewall DNAT | Firewall Team </br>(Private Link "Provider Tenant") |
+| 1a      | CDC source or target domain name | PE IP address                   | DNS Resolver       | Estuary Team </br>(Private Link "Consumer Tenant") |
+| 1b      | PLS SNAT IP address           | CDC source or target domain name in </br>landing zone VNet or on-prem network | Firewall DNAT | Firewall Team </br>(Private Link "Provider Tenant") |
 
 * Good operationally, because mapping IP addresses one-to-one is less management overhead than alternative methods, such as using layer-4 TCP and UDP ports.
 * Good reliability, because a simple mapping scheme is less prone to error and leads to a more robust system.
