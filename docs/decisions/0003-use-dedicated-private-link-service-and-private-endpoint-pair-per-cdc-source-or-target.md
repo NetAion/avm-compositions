@@ -1,6 +1,6 @@
 ---
 status: "proposed"
-date: 2025-03-25
+date: 2025-03-28
 decision-makers: 
 consulted: 
 informed: 
@@ -38,10 +38,10 @@ Chosen option: "Dedicated private link service and private endpoint pair per CDC
 
 **Method:** provision a dedicated private link service (PLS) and private endpoint (PE) pair for each CDC source or target. Use the following IP address mapping scheme for each CDC source or target, with standard address translation/resolution methods managed by each team.
 
-|Entry Id.| Match                         | -> Map To                       | Translation Method | Entry Managed By |
-|---------|-------------------------------|---------------------------------|--------------------|------------------|
-| 1a      | CDC source or target domain name | PE IP address                   | DNS Resolver       | Estuary Team </br>(Private Link "Consumer Tenant") |
-| 1b      | PLS SNAT IP address           | CDC source or target domain name in </br>landing zone VNet or on-prem network | Firewall DNAT | Firewall Team </br>(Private Link "Provider Tenant") |
+|Entry Id.| Match                            | -> Map To     | Translation Method | Entry Managed By                            |
+|---------|----------------------------------|---------------|--------------------|---------------------------------------------|
+| 1a      | CDC source or target domain name | PE IP address | DNS Resolver       | Estuary Team (Private Link Consumer Tenant) |
+| 1b      | PLS SNAT IP address              | CDC source or target domain name in landing zone VNet or on-prem network | Firewall DNAT | Firewall Team (Private Link Provider Tenant) |
 
 * Good operationally, because mapping IP addresses one-to-one is less management overhead than alternative methods, such as using layer-4 TCP and UDP ports.
 * Good reliability, because a simple mapping scheme is less prone to error and leads to a more robust system.
