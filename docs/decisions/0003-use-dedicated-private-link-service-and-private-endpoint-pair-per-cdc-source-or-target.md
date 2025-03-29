@@ -26,7 +26,7 @@ Align with the [Estuary Flow Private Deployment option](https://docs.estuary.dev
 
 * Dedicated Azure private link service and private endpoint pair per CDC source or target, with IP address mapping
 * Single Azure private link for all CDC sources and targets, with TCP/UDP port to IP mapping
-* Single Azure private link service, dedicated private endpoint per CDC source or target, with TCP Proxy v2
+* Single Azure private link service and dedicated private endpoint per CDC source or target, with TCP Proxy v2
 
 ## Decision Outcome
 
@@ -55,12 +55,12 @@ Chosen option: "Dedicated private link service and private endpoint pair per CDC
 * Neutral reliability, because effort to coordinate a more complex mapping scheme between Estuary users and firewall admins could lead to a more brittle system. I.e., complexity is increased where both layer-4 port and layer-3 address translation are involved.
 * Good cost optimisation and operational efficiency, because a single PLS and a single PE for all CDC sources and targets is economical use of Azure resources.
 
-### Single Azure private link service, dedicated private endpoint per CDC source or target, with TCP Proxy v2
+### Single Azure private link service and dedicated private endpoint per CDC source or target, with TCP Proxy v2
 
-**Method:** provision a single PLS for all CDC sources and targets, and multiple PEs, one per CDC source and target. Use [TCP Proxy v2](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#getting-connection-information-using-tcp-proxy-v2) to identify the PE IP address or link ID in each TCP session
+**Method:** provision a single PLS for all CDC sources and targets, and multiple PEs, one for each CDC source or target. Use [TCP Proxy v2](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#getting-connection-information-using-tcp-proxy-v2) to identify the PE IP address or link ID in each TCP session
 
 * Good operationally, because a scheme that maps PE link IDs to CDC source or target IP addresses is relatively low management overhead, and a single PLS is efficient use of Azure resources.
-* Bad operationally, because a proxy VM needs to be maintained and supported, such as [NGINX](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/).
+* Bad operationally, because a proxy server needs to be maintained and supported, such as [NGINX](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/).
 * Bad performance, because UDP is not supported.
 
 ## More Information
