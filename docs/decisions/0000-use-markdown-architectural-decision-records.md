@@ -1,3 +1,11 @@
+---
+status: "proposed"
+date: 2025-03-05
+decision-makers:
+consulted:
+informed:
+---
+
 # Use Markdown Architectural Decision Records
 
 ## Context and Problem Statement
